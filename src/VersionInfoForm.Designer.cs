@@ -1,6 +1,6 @@
 ﻿namespace ImageBond
 {
-    partial class VersionInfo
+    partial class VersionInfoForm
     {
         /// <summary>
         /// Required designer variable.

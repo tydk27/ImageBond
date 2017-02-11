@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ImageBond
 {
-    static class MainProgram
+    static class ImageBondMain
     {
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
@@ -16,7 +13,9 @@ namespace ImageBond
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ImageBond());
+            Application.Run(new ImageBondForm());
+
+            Properties.Settings.Default.Save();
         }
     }
 }
