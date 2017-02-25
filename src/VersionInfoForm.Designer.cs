@@ -28,39 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.productName = new System.Windows.Forms.Label();
+            this.copyright = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // productName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.productName.AutoSize = true;
+            this.productName.Location = new System.Drawing.Point(12, 9);
+            this.productName.Name = "productName";
+            this.productName.Size = new System.Drawing.Size(72, 12);
+            this.productName.TabIndex = 0;
+            this.productName.Text = "productName";
             // 
-            // label2
+            // copyright
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 33);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 12);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "label2";
+            this.copyright.AutoSize = true;
+            this.copyright.Location = new System.Drawing.Point(12, 33);
+            this.copyright.Name = "copyright";
+            this.copyright.Size = new System.Drawing.Size(51, 12);
+            this.copyright.TabIndex = 2;
+            this.copyright.Text = "copylight";
             // 
-            // VersionInfo
+            // VersionInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 59);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.copyright);
+            this.Controls.Add(this.productName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "VersionInfo";
+            this.Name = "VersionInfoForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -72,7 +72,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label productName;
+        private System.Windows.Forms.Label copyright;
     }
 }

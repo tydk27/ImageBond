@@ -350,7 +350,6 @@
             this.Name = "ImageBondForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ImageBond";
-            this.Load += new System.EventHandler(this.ImageBondForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);

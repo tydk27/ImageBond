@@ -5,12 +5,12 @@ using System.Windows.Forms;
 namespace ImageBond
 {
     /// <summary>
-    /// 
+    /// VersionInfoFormClass
     /// </summary>
     public partial class VersionInfoForm : Form
     {
         /// <summary>
-        /// 
+        /// VersionInfoForm
         /// </summary>
         public VersionInfoForm()
         {
@@ -31,8 +31,8 @@ namespace ImageBond
             }
             
             Text = appProductName + " のバージョン情報";
-            label1.Text = appProductName + " : version " + appVersion;
-            label2.Text = appCopyright;
+            productName.Text = appProductName + " : version " + appVersion;
+            copyright.Text = appCopyright;
         }
     }
 }

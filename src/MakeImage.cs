@@ -3,7 +3,7 @@
 namespace ImageBond
 {
     /// <summary>
-    /// MakeImage
+    /// MakeImageClass
     /// </summary>
     public class MakeImage
     {

@@ -5,7 +5,7 @@ using System.Windows.Forms;
 namespace ImageBond
 {
     /// <summary>
-    /// ImageBondForm
+    /// ImageBondFormClass
     /// </summary>
     public partial class ImageBondForm : Form
     {
@@ -45,7 +45,7 @@ namespace ImageBond
 
             if (System.IO.File.Exists(outputFileName))
             {
-                DialogResult dialogResult = showYesNoMessae("既にファイルが存在します。上書きしますか？");
+                DialogResult dialogResult = showYesNoMessae("既にファイルが存在します\n上書きしますか？");
                 if (dialogResult == DialogResult.No)
                 {
                     return;
@@ -91,7 +91,7 @@ namespace ImageBond
             }
             catch
             {
-                showErrorMessae("作成に失敗しました。");
+                showErrorMessae("作成に失敗しました");
             }
             finally
             {
@@ -158,7 +158,7 @@ namespace ImageBond
             string[] file = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             if (file.Length != 1)
             {
-                showErrorMessae("画像は1つずつ選択してください。");
+                showErrorMessae("画像ファイルは1つずつ選択してください");
                 return;
             }
 
@@ -219,11 +219,6 @@ namespace ImageBond
         private DialogResult showErrorMessae(string message)
         {
             return MessageBox.Show(message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        private void ImageBondForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
