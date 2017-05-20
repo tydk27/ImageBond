@@ -6,14 +6,14 @@ namespace ImageBond
     static class ImageBondMain
     {
         /// <summary>
-        /// アプリケーションのメイン エントリ ポイントです。
+        /// Main
         /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ImageBondForm());
+            Application.Run(new Views.Main.ImageBondForm());
 
             Properties.Settings.Default.Save();
         }

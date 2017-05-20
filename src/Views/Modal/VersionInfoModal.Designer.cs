@@ -1,6 +1,6 @@
-﻿namespace ImageBond
+﻿namespace ImageBond.Views.Modal
 {
-    partial class VersionInfoForm
+    partial class VersionInfoModal
     {
         /// <summary>
         /// Required designer variable.
@@ -50,7 +50,7 @@
             this.copyright.TabIndex = 2;
             this.copyright.Text = "copylight";
             // 
-            // VersionInfoForm
+            // VersionInfoModal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -60,11 +60,12 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "VersionInfoForm";
+            this.Name = "VersionInfoModal";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "バージョン情報";
+            this.Load += new System.EventHandler(this.onLoad);
             this.ResumeLayout(false);
             this.PerformLayout();
 

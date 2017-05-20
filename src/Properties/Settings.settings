@@ -5,7 +5,7 @@
     <Setting Name="width" Type="System.String" Scope="User">
       <Value Profile="(Default)">1280</Value>
     </Setting>
-    <Setting Name="hight" Type="System.String" Scope="User">
+    <Setting Name="height" Type="System.String" Scope="User">
       <Value Profile="(Default)">720</Value>
     </Setting>
     <Setting Name="cropX" Type="System.String" Scope="User">

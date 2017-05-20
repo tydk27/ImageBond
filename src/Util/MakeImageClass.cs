@@ -1,11 +1,8 @@
 ﻿using System.Drawing;
 
-namespace ImageBond
+namespace ImageBond.Util
 {
-    /// <summary>
-    /// MakeImageClass
-    /// </summary>
-    public class MakeImage
+    public class MakeImageClass
     {
         /// <summary>
         /// crop image

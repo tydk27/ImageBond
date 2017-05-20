@@ -1,43 +1,36 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using ImageBond.Util;
+using ImageBond.Views.Modal;
 
-namespace ImageBond
+namespace ImageBond.Views.Main
 {
-    /// <summary>
-    /// ImageBondFormClass
-    /// </summary>
     public partial class ImageBondForm : Form
     {
         /// <summary>
         /// MakeImage
         /// </summary>
-        MakeImage mi = null;
-
+        MakeImageClass mi = null;
+        
         /// <summary>
-        /// VersionInfoForm
-        /// </summary>
-        VersionInfoForm vi = null;
-
-        /// <summary>
-        /// Constructor
+        /// init
         /// </summary>
         public ImageBondForm()
         {
             InitializeComponent();
 
-            mi = new MakeImage();
-            vi = new VersionInfoForm();
+            mi = new MakeImageClass();
         }
 
         /// <summary>
-        /// OutputButton_Click
+        /// OnClickOutput
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OutputButton_Click(object sender, EventArgs e)
+        private void OnClickOutput(object sender, EventArgs e)
         {
-            string outputFileName = output.Text;
+            string outputFileName = outputPathBox.Text;
             if (string.IsNullOrEmpty(outputFileName))
             {
                 outputFileName = System.IO.Path.Combine(Application.StartupPath + "\\output.jpg");
@@ -45,17 +38,17 @@ namespace ImageBond
 
             if (System.IO.File.Exists(outputFileName))
             {
-                DialogResult dialogResult = showYesNoMessae("既にファイルが存在します\n上書きしますか？");
+                DialogResult dialogResult = ShowYesNoMessae("既にファイルが存在します\n上書きしますか？");
                 if (dialogResult == DialogResult.No)
                 {
                     return;
                 }
             }
 
-            int cropX = int.Parse(this.cropX.Text);
-            int cropY = int.Parse(this.cropY.Text);
-            int width = int.Parse(this.width.Text);
-            int height = int.Parse(this.height.Text);
+            int cropX = int.Parse(Properties.Settings.Default.cropX);
+            int cropY = int.Parse(Properties.Settings.Default.cropY);
+            int width = int.Parse(Properties.Settings.Default.width);
+            int height = int.Parse(Properties.Settings.Default.height);
 
             Bitmap topRight = null;
             Bitmap topLeft = null;
@@ -91,7 +84,7 @@ namespace ImageBond
             }
             catch
             {
-                showErrorMessae("作成に失敗しました");
+                ShowErrorMessae("作成に失敗しました");
             }
             finally
             {
@@ -106,13 +99,13 @@ namespace ImageBond
         }
 
         /// <summary>
-        /// SelectSaveFolderButton_Click
+        /// OnClickSelectFolder
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SelectSaveFolderButton_Click(object sender, EventArgs e)
+        private void OnClickSelectFolder(object sender, EventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
+            SaveFileDialog sfd = null;
             sfd.InitialDirectory = System.IO.Directory.GetCurrentDirectory();
             sfd.Filter = "Bitmap Image |*.bmp|Gif Image |*.gif|JPEG Image |*.jpg|Png Image |*.png";
             sfd.FilterIndex = 3;
@@ -122,43 +115,33 @@ namespace ImageBond
             sfd.CheckPathExists = true;
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                output.Text = sfd.FileName;
+                outputPathBox.Text = sfd.FileName;
             }
         }
 
         /// <summary>
-        /// ExitToolStripMenuItem_Click
+        /// OnClickExit
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OnClickExit(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
         /// <summary>
-        /// VersionToolStripMenuItem_Click
+        /// OnDragDropPictureBox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void VersionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            vi.ShowDialog();
-        }
-
-        /// <summary>
-        /// PictureBox_DragDrop
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void PictureBox_DragDrop(object sender, DragEventArgs e)
+        private void OnDragDropPictureBox(object sender, DragEventArgs e)
         {
             ((PictureBox)sender).Image = null;
 
             string[] file = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             if (file.Length != 1)
             {
-                showErrorMessae("画像ファイルは1つずつ選択してください");
+                ShowErrorMessae("画像ファイルは1つずつ選択してください");
                 return;
             }
 
@@ -170,7 +153,7 @@ namespace ImageBond
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void PictureBox_DragEnter(object sender, DragEventArgs e)
+        private void OnDragEnterPictureBox(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
@@ -179,46 +162,62 @@ namespace ImageBond
         }
 
         /// <summary>
-        /// resetButton_Click
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void resetButton_Click(object sender, EventArgs e)
-        {
-            topRightBox.Image = null;
-            topLeftBox.Image = null;
-            bottomRightBox.Image = null;
-            bottomLeftBox.Image = null;
-        }
-
-        /// <summary>
-        /// showMessae
+        /// ShowYesNoMessae
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        private DialogResult showMessae(string message)
-        {
-            return MessageBox.Show(message, "ImageBond", MessageBoxButtons.OK);
-        }
-
-        /// <summary>
-        /// showYesNoMessae
-        /// </summary>
-        /// <param name="message"></param>
-        /// <returns></returns>
-        private DialogResult showYesNoMessae(string message)
+        private DialogResult ShowYesNoMessae(string message)
         {
             return MessageBox.Show(message, "ImageBond", MessageBoxButtons.YesNo);
         }
 
         /// <summary>
-        /// showErrorMessae
+        /// ShowErrorMessae
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        private DialogResult showErrorMessae(string message)
+        private DialogResult ShowErrorMessae(string message)
         {
             return MessageBox.Show(message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        /// <summary>
+        /// OnClickShowVersionInfo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnClickShowVersionInfo(object sender, EventArgs e)
+        {
+            VersionInfoModal f = new VersionInfoModal();
+            f.StartPosition = FormStartPosition.CenterParent;
+            f.ShowDialog(this);
+            f.Dispose();
+        }
+
+        /// <summary>
+        /// onClickCustomizeResolution
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnClickCustomizeResolution(object sender, EventArgs e)
+        {
+            CustomizeResolutionModal f = new CustomizeResolutionModal();
+            f.StartPosition = FormStartPosition.CenterParent;
+            f.ShowDialog(this);
+            f.Dispose();
+        }
+
+        /// <summary>
+        /// OnClickCustomizeCrop
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnClickCustomizeCrop(object sender, EventArgs e)
+        {
+            CustomizeCropModal f = new CustomizeCropModal();
+            f.StartPosition = FormStartPosition.CenterParent;
+            f.ShowDialog(this);
+            f.Dispose();
         }
     }
 }

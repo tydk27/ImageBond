@@ -68,22 +68,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ImageBondForm.cs">
+    <Compile Include="Views\Main\ImageBondForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ImageBondForm.Designer.cs">
+    <Compile Include="Views\Main\ImageBondForm.Designer.cs">
       <DependentUpon>ImageBondForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageBondMain.cs" />
-    <Compile Include="MakeImage.cs" />
+    <Compile Include="Util\MakeImageClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VersionInfoForm.cs">
+    <Compile Include="Views\Modal\VersionInfoModal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="VersionInfoForm.Designer.cs">
-      <DependentUpon>VersionInfoForm.cs</DependentUpon>
+    <Compile Include="Views\Modal\VersionInfoModal.Designer.cs">
+      <DependentUpon>VersionInfoModal.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ImageBondForm.resx">
+    <Compile Include="Views\Modal\CustomizeCropModal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modal\CustomizeCropModal.Designer.cs">
+      <DependentUpon>CustomizeCropModal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modal\CustomizeResolutionModal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modal\CustomizeResolutionModal.Designer.cs">
+      <DependentUpon>CustomizeResolutionModal.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\Main\ImageBondForm.resx">
       <DependentUpon>ImageBondForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -95,8 +107,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="VersionInfoForm.resx">
-      <DependentUpon>VersionInfoForm.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Modal\CustomizeCropModal.resx">
+      <DependentUpon>CustomizeCropModal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modal\CustomizeResolutionModal.resx">
+      <DependentUpon>CustomizeResolutionModal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modal\VersionInfoModal.resx">
+      <DependentUpon>VersionInfoModal.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
