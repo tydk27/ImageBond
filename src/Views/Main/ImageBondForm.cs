@@ -21,7 +21,9 @@ namespace ImageBond.Views.Main
             InitializeComponent();
 
             mi = new MakeImageClass();
-            if (string.IsNullOrEmpty(Properties.Settings.Default.saveDirectory))
+
+            string saveDirectory = Properties.Settings.Default.saveDirectory;
+            if (string.IsNullOrEmpty(saveDirectory) || !System.IO.Directory.Exists(saveDirectory))
             {
                 Properties.Settings.Default.saveDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
             }
