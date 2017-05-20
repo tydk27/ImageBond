@@ -12,12 +12,7 @@ namespace ImageBond.Views.Main
         /// MakeImage
         /// </summary>
         MakeImageClass mi = null;
-
-        /// <summary>
-        /// initialSaveDir
-        /// </summary>
-        string saveDirectory = null;
-
+        
         /// <summary>
         /// init
         /// </summary>
@@ -26,7 +21,10 @@ namespace ImageBond.Views.Main
             InitializeComponent();
 
             mi = new MakeImageClass();
-            saveDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            if (string.IsNullOrEmpty(Properties.Settings.Default.saveDirectory))
+            {
+                Properties.Settings.Default.saveDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            }
         }
 
         /// <summary>
@@ -60,7 +58,7 @@ namespace ImageBond.Views.Main
             saveFileName = (string.IsNullOrEmpty(saveFileName)) ? "output.png" : saveFileName;
 
             string savePath = null;
-            savePath = System.IO.Path.Combine(saveDirectory, saveFileName);
+            savePath = System.IO.Path.Combine(Properties.Settings.Default.saveDirectory, saveFileName);
             savePath += (string.IsNullOrEmpty(System.IO.Path.GetExtension(savePath))) ? ".png" : null;
 
             if (System.IO.File.Exists(savePath))
@@ -290,11 +288,11 @@ namespace ImageBond.Views.Main
             {
                 Description = "保存先フォルダを選択してください",
                 RootFolder = Environment.SpecialFolder.Desktop,
-                SelectedPath = saveDirectory
+                SelectedPath = Properties.Settings.Default.saveDirectory
             };
             if (fbd.ShowDialog(this) == DialogResult.OK)
             {
-                saveDirectory = fbd.SelectedPath;
+                Properties.Settings.Default.saveDirectory = fbd.SelectedPath;
             }
         }
 

@@ -82,5 +82,17 @@ namespace ImageBond.Properties {
                 this["allowDrop"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string saveDirectory {
+            get {
+                return ((string)(this["saveDirectory"]));
+            }
+            set {
+                this["saveDirectory"] = value;
+            }
+        }
     }
 }
