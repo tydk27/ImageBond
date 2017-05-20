@@ -13,6 +13,11 @@ namespace ImageBond.Util
         /// <returns></returns>
         public Bitmap CropImage(Bitmap img, int x, int y)
         {
+            if (img == null)
+            {
+                return null;
+            }
+
             int width = img.Width - x * 2;
             int height = img.Height - y * 2;
 
@@ -31,6 +36,11 @@ namespace ImageBond.Util
         /// <returns></returns>
         public Bitmap ResizeImage(Bitmap img, int width, int height)
         {
+            if (img == null)
+            {
+                return null;
+            }
+
             Bitmap image = new Bitmap(width, height);
             Graphics graphics = Graphics.FromImage(image);
 
@@ -50,6 +60,11 @@ namespace ImageBond.Util
         /// <returns></returns>
         public Bitmap ChainImage(Bitmap img1, Bitmap img2, bool chainFlg)
         {
+            if (img1 == null || img2 == null)
+            {
+                return null;
+            }
+
             int width, height = 0;
 
             // trueの場合は画像を横に結合する

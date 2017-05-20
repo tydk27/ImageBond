@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.saveFileNameBox = new System.Windows.Forms.TextBox();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,13 +40,14 @@
             this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.versionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageStage = new System.Windows.Forms.GroupBox();
-            this.saveButton = new System.Windows.Forms.Button();
-            this.saveFileNameLabel = new System.Windows.Forms.Label();
-            this.resultLabel = new System.Windows.Forms.Label();
             this.bottomRightBox = new System.Windows.Forms.PictureBox();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.bottomLeftBox = new System.Windows.Forms.PictureBox();
             this.topRightBox = new System.Windows.Forms.PictureBox();
             this.topLeftBox = new System.Windows.Forms.PictureBox();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.saveFileNameLabel = new System.Windows.Forms.Label();
+            this.resultLabel = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.imageStage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bottomRightBox)).BeginInit();
@@ -148,6 +150,72 @@
             this.imageStage.TabStop = false;
             this.imageStage.Text = "画像をドラッグアンドドロップ";
             // 
+            // bottomRightBox
+            // 
+            this.bottomRightBox.AllowDrop = global::ImageBond.Properties.Settings.Default.allowDrop;
+            this.bottomRightBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.bottomRightBox.ContextMenuStrip = this.contextMenuStrip;
+            this.bottomRightBox.DataBindings.Add(new System.Windows.Forms.Binding("AllowDrop", global::ImageBond.Properties.Settings.Default, "allowDrop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.bottomRightBox.Location = new System.Drawing.Point(325, 197);
+            this.bottomRightBox.Name = "bottomRightBox";
+            this.bottomRightBox.Size = new System.Drawing.Size(320, 180);
+            this.bottomRightBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.bottomRightBox.TabIndex = 20;
+            this.bottomRightBox.TabStop = false;
+            this.bottomRightBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDropPictureBox);
+            this.bottomRightBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnterPictureBox);
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(153, 26);
+            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.OpeningContextMenuStripForResetImage);
+            // 
+            // bottomLeftBox
+            // 
+            this.bottomLeftBox.AllowDrop = global::ImageBond.Properties.Settings.Default.allowDrop;
+            this.bottomLeftBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.bottomLeftBox.ContextMenuStrip = this.contextMenuStrip;
+            this.bottomLeftBox.DataBindings.Add(new System.Windows.Forms.Binding("AllowDrop", global::ImageBond.Properties.Settings.Default, "allowDrop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.bottomLeftBox.Location = new System.Drawing.Point(6, 197);
+            this.bottomLeftBox.Name = "bottomLeftBox";
+            this.bottomLeftBox.Size = new System.Drawing.Size(320, 180);
+            this.bottomLeftBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.bottomLeftBox.TabIndex = 19;
+            this.bottomLeftBox.TabStop = false;
+            this.bottomLeftBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDropPictureBox);
+            this.bottomLeftBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnterPictureBox);
+            // 
+            // topRightBox
+            // 
+            this.topRightBox.AllowDrop = global::ImageBond.Properties.Settings.Default.allowDrop;
+            this.topRightBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.topRightBox.ContextMenuStrip = this.contextMenuStrip;
+            this.topRightBox.DataBindings.Add(new System.Windows.Forms.Binding("AllowDrop", global::ImageBond.Properties.Settings.Default, "allowDrop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.topRightBox.Location = new System.Drawing.Point(325, 18);
+            this.topRightBox.Name = "topRightBox";
+            this.topRightBox.Size = new System.Drawing.Size(320, 180);
+            this.topRightBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.topRightBox.TabIndex = 18;
+            this.topRightBox.TabStop = false;
+            this.topRightBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDropPictureBox);
+            this.topRightBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnterPictureBox);
+            // 
+            // topLeftBox
+            // 
+            this.topLeftBox.AllowDrop = global::ImageBond.Properties.Settings.Default.allowDrop;
+            this.topLeftBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.topLeftBox.ContextMenuStrip = this.contextMenuStrip;
+            this.topLeftBox.DataBindings.Add(new System.Windows.Forms.Binding("AllowDrop", global::ImageBond.Properties.Settings.Default, "allowDrop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.topLeftBox.Location = new System.Drawing.Point(6, 18);
+            this.topLeftBox.Name = "topLeftBox";
+            this.topLeftBox.Size = new System.Drawing.Size(320, 180);
+            this.topLeftBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.topLeftBox.TabIndex = 17;
+            this.topLeftBox.TabStop = false;
+            this.topLeftBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDropPictureBox);
+            this.topLeftBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnterPictureBox);
+            // 
             // saveButton
             // 
             this.saveButton.Location = new System.Drawing.Point(585, 442);
@@ -174,62 +242,6 @@
             this.resultLabel.Name = "resultLabel";
             this.resultLabel.Size = new System.Drawing.Size(0, 12);
             this.resultLabel.TabIndex = 18;
-            // 
-            // bottomRightBox
-            // 
-            this.bottomRightBox.AllowDrop = global::ImageBond.Properties.Settings.Default.allowDrop;
-            this.bottomRightBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.bottomRightBox.DataBindings.Add(new System.Windows.Forms.Binding("AllowDrop", global::ImageBond.Properties.Settings.Default, "allowDrop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.bottomRightBox.Location = new System.Drawing.Point(325, 197);
-            this.bottomRightBox.Name = "bottomRightBox";
-            this.bottomRightBox.Size = new System.Drawing.Size(320, 180);
-            this.bottomRightBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.bottomRightBox.TabIndex = 20;
-            this.bottomRightBox.TabStop = false;
-            this.bottomRightBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDropPictureBox);
-            this.bottomRightBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnterPictureBox);
-            // 
-            // bottomLeftBox
-            // 
-            this.bottomLeftBox.AllowDrop = global::ImageBond.Properties.Settings.Default.allowDrop;
-            this.bottomLeftBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.bottomLeftBox.DataBindings.Add(new System.Windows.Forms.Binding("AllowDrop", global::ImageBond.Properties.Settings.Default, "allowDrop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.bottomLeftBox.Location = new System.Drawing.Point(6, 197);
-            this.bottomLeftBox.Name = "bottomLeftBox";
-            this.bottomLeftBox.Size = new System.Drawing.Size(320, 180);
-            this.bottomLeftBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.bottomLeftBox.TabIndex = 19;
-            this.bottomLeftBox.TabStop = false;
-            this.bottomLeftBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDropPictureBox);
-            this.bottomLeftBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnterPictureBox);
-            // 
-            // topRightBox
-            // 
-            this.topRightBox.AllowDrop = global::ImageBond.Properties.Settings.Default.allowDrop;
-            this.topRightBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.topRightBox.DataBindings.Add(new System.Windows.Forms.Binding("AllowDrop", global::ImageBond.Properties.Settings.Default, "allowDrop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.topRightBox.Location = new System.Drawing.Point(325, 18);
-            this.topRightBox.Name = "topRightBox";
-            this.topRightBox.Size = new System.Drawing.Size(320, 180);
-            this.topRightBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.topRightBox.TabIndex = 18;
-            this.topRightBox.TabStop = false;
-            this.topRightBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDropPictureBox);
-            this.topRightBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnterPictureBox);
-            // 
-            // topLeftBox
-            // 
-            this.topLeftBox.AllowDrop = global::ImageBond.Properties.Settings.Default.allowDrop;
-            this.topLeftBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.topLeftBox.DataBindings.Add(new System.Windows.Forms.Binding("AllowDrop", global::ImageBond.Properties.Settings.Default, "allowDrop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.topLeftBox.Location = new System.Drawing.Point(6, 18);
-            this.topLeftBox.Name = "topLeftBox";
-            this.topLeftBox.Size = new System.Drawing.Size(320, 180);
-            this.topLeftBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.topLeftBox.TabIndex = 17;
-            this.topLeftBox.TabStop = false;
-            this.topLeftBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDropPictureBox);
-            this.topLeftBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnterPictureBox);
             // 
             // ImageBondForm
             // 
@@ -281,6 +293,7 @@
         private System.Windows.Forms.Label saveFileNameLabel;
         private System.Windows.Forms.ToolStripMenuItem setSaveDirectoryMenuItem;
         private System.Windows.Forms.Label resultLabel;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
     }
 }
 

@@ -38,47 +38,46 @@ namespace ImageBond.Views.Main
         {
             resultLabel.Text = null;
 
+            Bitmap topRight = null;
+            Bitmap topLeft = null;
+            Bitmap bottomRight = null;
+            Bitmap bottomLeft = null;
+
+            int imageCnt = 0;
+
+            topRight = CheckHasImage(topLeftBox, ref imageCnt);
+            topLeft = CheckHasImage(topRightBox, ref imageCnt);
+            bottomRight = CheckHasImage(bottomLeftBox, ref imageCnt);
+            bottomLeft = CheckHasImage(bottomRightBox, ref imageCnt);
+
+            if (imageCnt != 1 && imageCnt != 4)
+            {
+                resultLabel.Text = "【エラー】：指定可能な画像枚数は1枚もしくは4枚です";
+                return;
+            }
+
             string saveFileName = saveFileNameBox.Text;
-            string saveObject = null;
+            saveFileName = (string.IsNullOrEmpty(saveFileName)) ? "output.png" : saveFileName;
 
-            if (string.IsNullOrEmpty(saveFileName))
-            {
-                saveFileName = "output.png";
-            }
-            saveObject = System.IO.Path.Combine(saveDirectory, saveFileName);
+            string savePath = null;
+            savePath = System.IO.Path.Combine(saveDirectory, saveFileName);
+            savePath += (string.IsNullOrEmpty(System.IO.Path.GetExtension(savePath))) ? ".png" : null;
 
-            if (string.IsNullOrEmpty(System.IO.Path.GetExtension(saveObject)))
-            {
-                saveObject += ".png";
-            }
-
-            if (System.IO.File.Exists(saveObject))
+            if (System.IO.File.Exists(savePath))
             {
                 DialogResult dialogResult = ShowYesNoMessae("既にファイルが存在します\n上書きしますか？");
-                if (dialogResult == DialogResult.No)
-                {
-                    return;
-                }
+                if (dialogResult == DialogResult.No) return;
             }
 
             int cropX = int.Parse(Properties.Settings.Default.cropX);
             int cropY = int.Parse(Properties.Settings.Default.cropY);
             int width = int.Parse(Properties.Settings.Default.width);
             int height = int.Parse(Properties.Settings.Default.height);
-
-            Bitmap topRight = null;
-            Bitmap topLeft = null;
-            Bitmap bottomRight = null;
-            Bitmap bottomLeft = null;
+            
             Bitmap top = null;
             Bitmap bottom = null;
             Bitmap complete = null;
-            
-            topRight = (topLeftBox != null || topLeftBox.Image != null) ? (Bitmap)topLeftBox.Image : null;
-            topLeft = (topRightBox != null || topRightBox.Image != null) ? (Bitmap)topRightBox.Image : null;
-            bottomRight = (bottomLeftBox != null || bottomLeftBox.Image != null) ? (Bitmap)bottomLeftBox.Image : null;
-            bottomLeft = (bottomRightBox != null || bottomRightBox.Image != null) ? (Bitmap)bottomRightBox.Image : null;
-            
+
             try
             {
                 topRight = mi.CropImage(topRight, cropX, cropY);
@@ -89,13 +88,35 @@ namespace ImageBond.Views.Main
                 bottomLeft = mi.CropImage(bottomLeft, cropX, cropY);
                 bottom = mi.ChainImage(bottomRight, bottomLeft, true);
 
-                complete = mi.ChainImage(top, bottom, false);
-                complete = mi.ResizeImage(complete, width, height);
+                if (imageCnt == 4)
+                {
+                    complete = mi.ChainImage(top, bottom, false);
+                    complete = mi.ResizeImage(complete, width, height);
+                }
+                else
+                {
+                    if (topRight != null)
+                    {
+                        complete = mi.ResizeImage(topRight, width, height);
+                    }
+                    if (topLeft != null)
+                    {
+                        complete = mi.ResizeImage(topLeft, width, height);
+                    }
+                    if (bottomRight != null)
+                    {
+                        complete = mi.ResizeImage(bottomRight, width, height);
+                    }
+                    if (bottomLeft != null)
+                    {
+                        complete = mi.ResizeImage(bottomLeft, width, height);
+                    }
+                }
 
-                System.Drawing.Imaging.ImageFormat format = mi.GetImageFormat(System.IO.Path.GetExtension(saveObject));
-                complete.Save(saveObject, format);
+                System.Drawing.Imaging.ImageFormat format = mi.GetImageFormat(System.IO.Path.GetExtension(savePath));
+                complete.Save(savePath, format);
 
-                resultLabel.Text = "【完了】 保存先：" + saveObject;
+                resultLabel.Text = "【完了】 保存先：" + savePath;
             }
             catch
             {
@@ -111,6 +132,23 @@ namespace ImageBond.Views.Main
                 if (bottom != null) bottom.Dispose();
                 if (complete != null) complete.Dispose();
             }
+        }
+
+        /// <summary>
+        /// CheckHasImage
+        /// </summary>
+        /// <param name="pb"></param>
+        /// <param name="cnt"></param>
+        /// <returns></returns>
+        private Bitmap CheckHasImage(PictureBox pb, ref int cnt)
+        {
+            Bitmap result = null;
+            if (pb != null && pb.Image != null)
+            {
+                result = (Bitmap)pb.Image;
+                cnt++;
+            }
+            return result;
         }
 
         /// <summary>
@@ -130,7 +168,12 @@ namespace ImageBond.Views.Main
         /// <param name="e"></param>
         private void OnDragDropPictureBox(object sender, DragEventArgs e)
         {
-            ((PictureBox)sender).Image = null;
+            PictureBox pb = (PictureBox)sender;
+            if (pb.Image != null)
+            {
+                pb.Image.Dispose();
+            }
+            pb.Image = null;
 
             string[] file = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             if (file.Length != 1)
@@ -252,6 +295,26 @@ namespace ImageBond.Views.Main
             if (fbd.ShowDialog(this) == DialogResult.OK)
             {
                 saveDirectory = fbd.SelectedPath;
+            }
+        }
+
+        /// <summary>
+        /// OpeningContextMenuStripForResetImage
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OpeningContextMenuStripForResetImage(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            ContextMenuStrip menu = (ContextMenuStrip)sender;
+            Control source = menu.SourceControl;
+            if (source != null)
+            {
+                PictureBox pb = (PictureBox)source;
+                if (pb.Image != null)
+                {
+                    pb.Image.Dispose();
+                }
+                pb.Image = null;
             }
         }
     }
