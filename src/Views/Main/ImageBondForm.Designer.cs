@@ -39,17 +39,17 @@
             this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.versionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageStage = new System.Windows.Forms.GroupBox();
-            this.bottomLeftBox = new System.Windows.Forms.PictureBox();
             this.bottomRightBox = new System.Windows.Forms.PictureBox();
-            this.topLeftBox = new System.Windows.Forms.PictureBox();
+            this.bottomLeftBox = new System.Windows.Forms.PictureBox();
             this.topRightBox = new System.Windows.Forms.PictureBox();
+            this.topLeftBox = new System.Windows.Forms.PictureBox();
             this.outputButton = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.imageStage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bottomLeftBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bottomRightBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.topLeftBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bottomLeftBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.topRightBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.topLeftBox)).BeginInit();
             this.SuspendLayout();
             // 
             // outputPathBox
@@ -137,10 +137,10 @@
             // 
             // imageStage
             // 
-            this.imageStage.Controls.Add(this.bottomLeftBox);
             this.imageStage.Controls.Add(this.bottomRightBox);
-            this.imageStage.Controls.Add(this.topLeftBox);
+            this.imageStage.Controls.Add(this.bottomLeftBox);
             this.imageStage.Controls.Add(this.topRightBox);
+            this.imageStage.Controls.Add(this.topLeftBox);
             this.imageStage.Location = new System.Drawing.Point(12, 27);
             this.imageStage.Name = "imageStage";
             this.imageStage.Size = new System.Drawing.Size(651, 383);
@@ -148,60 +148,61 @@
             this.imageStage.TabStop = false;
             this.imageStage.Text = "画像をドラッグアンドドロップ";
             // 
-            // bottomLeftBox
-            // 
-            this.bottomLeftBox.AllowDrop = global::ImageBond.Properties.Settings.Default.allowDrop;
-            this.bottomLeftBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.bottomLeftBox.DataBindings.Add(new System.Windows.Forms.Binding("AllowDrop", global::ImageBond.Properties.Settings.Default, "allowDrop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.bottomLeftBox.Location = new System.Drawing.Point(325, 197);
-            this.bottomLeftBox.Name = "bottomLeftBox";
-            this.bottomLeftBox.Size = new System.Drawing.Size(320, 180);
-            this.bottomLeftBox.TabIndex = 20;
-            this.bottomLeftBox.TabStop = false;
-            this.bottomLeftBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDropPictureBox);
-            this.bottomLeftBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnterPictureBox);
-            // 
             // bottomRightBox
             // 
             this.bottomRightBox.AllowDrop = global::ImageBond.Properties.Settings.Default.allowDrop;
             this.bottomRightBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.bottomRightBox.DataBindings.Add(new System.Windows.Forms.Binding("AllowDrop", global::ImageBond.Properties.Settings.Default, "allowDrop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.bottomRightBox.Location = new System.Drawing.Point(6, 197);
+            this.bottomRightBox.Location = new System.Drawing.Point(325, 197);
             this.bottomRightBox.Name = "bottomRightBox";
             this.bottomRightBox.Size = new System.Drawing.Size(320, 180);
             this.bottomRightBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.bottomRightBox.TabIndex = 19;
+            this.bottomRightBox.TabIndex = 20;
             this.bottomRightBox.TabStop = false;
             this.bottomRightBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDropPictureBox);
             this.bottomRightBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnterPictureBox);
             // 
-            // topLeftBox
+            // bottomLeftBox
             // 
-            this.topLeftBox.AllowDrop = global::ImageBond.Properties.Settings.Default.allowDrop;
-            this.topLeftBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.topLeftBox.DataBindings.Add(new System.Windows.Forms.Binding("AllowDrop", global::ImageBond.Properties.Settings.Default, "allowDrop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.topLeftBox.Location = new System.Drawing.Point(325, 18);
-            this.topLeftBox.Name = "topLeftBox";
-            this.topLeftBox.Size = new System.Drawing.Size(320, 180);
-            this.topLeftBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.topLeftBox.TabIndex = 18;
-            this.topLeftBox.TabStop = false;
-            this.topLeftBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDropPictureBox);
-            this.topLeftBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnterPictureBox);
+            this.bottomLeftBox.AllowDrop = global::ImageBond.Properties.Settings.Default.allowDrop;
+            this.bottomLeftBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.bottomLeftBox.DataBindings.Add(new System.Windows.Forms.Binding("AllowDrop", global::ImageBond.Properties.Settings.Default, "allowDrop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.bottomLeftBox.Location = new System.Drawing.Point(6, 197);
+            this.bottomLeftBox.Name = "bottomLeftBox";
+            this.bottomLeftBox.Size = new System.Drawing.Size(320, 180);
+            this.bottomLeftBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.bottomLeftBox.TabIndex = 19;
+            this.bottomLeftBox.TabStop = false;
+            this.bottomLeftBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDropPictureBox);
+            this.bottomLeftBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnterPictureBox);
             // 
             // topRightBox
             // 
             this.topRightBox.AllowDrop = global::ImageBond.Properties.Settings.Default.allowDrop;
             this.topRightBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.topRightBox.DataBindings.Add(new System.Windows.Forms.Binding("AllowDrop", global::ImageBond.Properties.Settings.Default, "allowDrop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.topRightBox.Location = new System.Drawing.Point(6, 18);
+            this.topRightBox.Location = new System.Drawing.Point(325, 18);
             this.topRightBox.Name = "topRightBox";
             this.topRightBox.Size = new System.Drawing.Size(320, 180);
             this.topRightBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.topRightBox.TabIndex = 17;
+            this.topRightBox.TabIndex = 18;
             this.topRightBox.TabStop = false;
             this.topRightBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDropPictureBox);
             this.topRightBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnterPictureBox);
+            // 
+            // topLeftBox
+            // 
+            this.topLeftBox.AllowDrop = global::ImageBond.Properties.Settings.Default.allowDrop;
+            this.topLeftBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.topLeftBox.DataBindings.Add(new System.Windows.Forms.Binding("AllowDrop", global::ImageBond.Properties.Settings.Default, "allowDrop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.topLeftBox.Location = new System.Drawing.Point(6, 18);
+            this.topLeftBox.Name = "topLeftBox";
+            this.topLeftBox.Size = new System.Drawing.Size(320, 180);
+            this.topLeftBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.topLeftBox.TabIndex = 17;
+            this.topLeftBox.TabStop = false;
+            this.topLeftBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDropPictureBox);
+            this.topLeftBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnterPictureBox);
             // 
             // outputButton
             // 
@@ -233,10 +234,10 @@
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.imageStage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bottomLeftBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bottomRightBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.topLeftBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bottomLeftBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.topRightBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.topLeftBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -251,11 +252,11 @@
         private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpMenu;
         private System.Windows.Forms.ToolStripMenuItem versionMenuItem;
-        private System.Windows.Forms.PictureBox topRightBox;
-        private System.Windows.Forms.GroupBox imageStage;
-        private System.Windows.Forms.PictureBox bottomLeftBox;
-        private System.Windows.Forms.PictureBox bottomRightBox;
         private System.Windows.Forms.PictureBox topLeftBox;
+        private System.Windows.Forms.GroupBox imageStage;
+        private System.Windows.Forms.PictureBox bottomRightBox;
+        private System.Windows.Forms.PictureBox bottomLeftBox;
+        private System.Windows.Forms.PictureBox topRightBox;
         private System.Windows.Forms.Button outputButton;
         private System.Windows.Forms.ToolStripMenuItem editMenu;
         private System.Windows.Forms.ToolStripMenuItem resolutionMenuItem;

@@ -58,10 +58,10 @@ namespace ImageBond.Views.Main
             Bitmap bottom = null;
             Bitmap complete = null;
             
-            topRight = (topRightBox != null || topRightBox.Image != null) ? (Bitmap)topRightBox.Image : null;
-            topLeft = (topLeftBox != null || topLeftBox.Image != null) ? (Bitmap)topLeftBox.Image : null;
-            bottomRight = (bottomRightBox != null || bottomRightBox.Image != null) ? (Bitmap)bottomRightBox.Image : null;
-            bottomLeft = (bottomLeftBox != null || bottomLeftBox.Image != null) ? (Bitmap)bottomLeftBox.Image : null;
+            topRight = (topLeftBox != null || topLeftBox.Image != null) ? (Bitmap)topLeftBox.Image : null;
+            topLeft = (topRightBox != null || topRightBox.Image != null) ? (Bitmap)topRightBox.Image : null;
+            bottomRight = (bottomLeftBox != null || bottomLeftBox.Image != null) ? (Bitmap)bottomLeftBox.Image : null;
+            bottomLeft = (bottomRightBox != null || bottomRightBox.Image != null) ? (Bitmap)bottomRightBox.Image : null;
             
             try
             {
@@ -105,14 +105,16 @@ namespace ImageBond.Views.Main
         /// <param name="e"></param>
         private void OnClickSelectFolder(object sender, EventArgs e)
         {
-            SaveFileDialog sfd = null;
-            sfd.InitialDirectory = System.IO.Directory.GetCurrentDirectory();
-            sfd.Filter = "Bitmap Image |*.bmp|Gif Image |*.gif|JPEG Image |*.jpg|Png Image |*.png";
-            sfd.FilterIndex = 3;
-            sfd.Title = "保存先を選択";
-            sfd.RestoreDirectory = true;
-            sfd.OverwritePrompt = true;
-            sfd.CheckPathExists = true;
+            SaveFileDialog sfd = new SaveFileDialog()
+            {
+                InitialDirectory = System.IO.Directory.GetCurrentDirectory(),
+                Filter = "Bitmap Image |*.bmp|Gif Image |*.gif|JPEG Image |*.jpg|Png Image |*.png",
+                FilterIndex = 3,
+                Title = "保存先を選択",
+                RestoreDirectory = true,
+                OverwritePrompt = true,
+                CheckPathExists = true
+            };
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 outputPathBox.Text = sfd.FileName;
@@ -188,8 +190,10 @@ namespace ImageBond.Views.Main
         /// <param name="e"></param>
         private void OnClickShowVersionInfo(object sender, EventArgs e)
         {
-            VersionInfoModal f = new VersionInfoModal();
-            f.StartPosition = FormStartPosition.CenterParent;
+            VersionInfoModal f = new VersionInfoModal()
+            {
+                StartPosition = FormStartPosition.CenterParent
+            };
             f.ShowDialog(this);
             f.Dispose();
         }
@@ -201,8 +205,10 @@ namespace ImageBond.Views.Main
         /// <param name="e"></param>
         private void OnClickCustomizeResolution(object sender, EventArgs e)
         {
-            CustomizeResolutionModal f = new CustomizeResolutionModal();
-            f.StartPosition = FormStartPosition.CenterParent;
+            CustomizeResolutionModal f = new CustomizeResolutionModal()
+            {
+                StartPosition = FormStartPosition.CenterParent
+            };
             f.ShowDialog(this);
             f.Dispose();
         }
@@ -214,8 +220,10 @@ namespace ImageBond.Views.Main
         /// <param name="e"></param>
         private void OnClickCustomizeCrop(object sender, EventArgs e)
         {
-            CustomizeCropModal f = new CustomizeCropModal();
-            f.StartPosition = FormStartPosition.CenterParent;
+            CustomizeCropModal f = new CustomizeCropModal()
+            {
+                StartPosition = FormStartPosition.CenterParent
+            };
             f.ShowDialog(this);
             f.Dispose();
         }
