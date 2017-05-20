@@ -12,7 +12,12 @@ namespace ImageBond.Views.Main
         /// MakeImage
         /// </summary>
         MakeImageClass mi = null;
-        
+
+        /// <summary>
+        /// initialSaveDir
+        /// </summary>
+        string saveDirectory = null;
+
         /// <summary>
         /// init
         /// </summary>
@@ -21,22 +26,33 @@ namespace ImageBond.Views.Main
             InitializeComponent();
 
             mi = new MakeImageClass();
+            saveDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         }
 
         /// <summary>
-        /// OnClickOutput
+        /// OnClickSaveButton
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnClickOutput(object sender, EventArgs e)
+        private void OnClickSaveButton(object sender, EventArgs e)
         {
-            string outputFileName = outputPathBox.Text;
-            if (string.IsNullOrEmpty(outputFileName))
+            resultLabel.Text = null;
+
+            string saveFileName = saveFileNameBox.Text;
+            string saveObject = null;
+
+            if (string.IsNullOrEmpty(saveFileName))
             {
-                outputFileName = System.IO.Path.Combine(Application.StartupPath + "\\output.jpg");
+                saveFileName = "output.png";
+            }
+            saveObject = System.IO.Path.Combine(saveDirectory, saveFileName);
+
+            if (string.IsNullOrEmpty(System.IO.Path.GetExtension(saveObject)))
+            {
+                saveObject += ".png";
             }
 
-            if (System.IO.File.Exists(outputFileName))
+            if (System.IO.File.Exists(saveObject))
             {
                 DialogResult dialogResult = ShowYesNoMessae("既にファイルが存在します\n上書きしますか？");
                 if (dialogResult == DialogResult.No)
@@ -76,15 +92,14 @@ namespace ImageBond.Views.Main
                 complete = mi.ChainImage(top, bottom, false);
                 complete = mi.ResizeImage(complete, width, height);
 
-                System.Drawing.Imaging.ImageFormat format = mi.GetImageFormat(System.IO.Path.GetExtension(outputFileName));
-                complete.Save(outputFileName, format);
+                System.Drawing.Imaging.ImageFormat format = mi.GetImageFormat(System.IO.Path.GetExtension(saveObject));
+                complete.Save(saveObject, format);
 
-                string savePath = System.IO.Path.GetDirectoryName(outputFileName);
-                System.Diagnostics.Process.Start(@savePath);
+                resultLabel.Text = "【完了】 保存先：" + saveObject;
             }
             catch
             {
-                ShowErrorMessae("作成に失敗しました");
+                resultLabel.Text = "【エラー】";
             }
             finally
             {
@@ -95,29 +110,6 @@ namespace ImageBond.Views.Main
                 if (top != null) top.Dispose();
                 if (bottom != null) bottom.Dispose();
                 if (complete != null) complete.Dispose();
-            }
-        }
-
-        /// <summary>
-        /// OnClickSelectFolder
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnClickSelectFolder(object sender, EventArgs e)
-        {
-            SaveFileDialog sfd = new SaveFileDialog()
-            {
-                InitialDirectory = System.IO.Directory.GetCurrentDirectory(),
-                Filter = "Bitmap Image |*.bmp|Gif Image |*.gif|JPEG Image |*.jpg|Png Image |*.png",
-                FilterIndex = 3,
-                Title = "保存先を選択",
-                RestoreDirectory = true,
-                OverwritePrompt = true,
-                CheckPathExists = true
-            };
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                outputPathBox.Text = sfd.FileName;
             }
         }
 
@@ -146,12 +138,28 @@ namespace ImageBond.Views.Main
                 ShowErrorMessae("画像ファイルは1つずつ選択してください");
                 return;
             }
-
-            ((PictureBox)sender).Image = Image.FromFile(file[0]);
+            
+            ((PictureBox)sender).Image = CreateImage(file[0]);
         }
 
         /// <summary>
-        /// PictureBox_DragEnter
+        /// CreateImage
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        private Image CreateImage(string filename)
+        {
+            System.IO.FileStream fs = new System.IO.FileStream(
+                filename,
+                System.IO.FileMode.Open,
+                System.IO.FileAccess.Read);
+            Image img = Image.FromStream(fs);
+            fs.Close();
+            return img;
+        }
+
+        /// <summary>
+        /// OnDragEnterPictureBox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -199,7 +207,7 @@ namespace ImageBond.Views.Main
         }
 
         /// <summary>
-        /// onClickCustomizeResolution
+        /// OnClickCustomizeResolution
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -226,6 +234,25 @@ namespace ImageBond.Views.Main
             };
             f.ShowDialog(this);
             f.Dispose();
+        }
+
+        /// <summary>
+        /// OnClickSetSaveDirectoryMenuItem
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnClickSetSaveDirectory(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog()
+            {
+                Description = "保存先フォルダを選択してください",
+                RootFolder = Environment.SpecialFolder.Desktop,
+                SelectedPath = saveDirectory
+            };
+            if (fbd.ShowDialog(this) == DialogResult.OK)
+            {
+                saveDirectory = fbd.SelectedPath;
+            }
         }
     }
 }

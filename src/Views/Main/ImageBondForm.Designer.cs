@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.outputPathBox = new System.Windows.Forms.TextBox();
-            this.selectFolderButton = new System.Windows.Forms.Button();
+            this.saveFileNameBox = new System.Windows.Forms.TextBox();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.setSaveDirectoryMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.resolutionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,11 +39,13 @@
             this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.versionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageStage = new System.Windows.Forms.GroupBox();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.saveFileNameLabel = new System.Windows.Forms.Label();
+            this.resultLabel = new System.Windows.Forms.Label();
             this.bottomRightBox = new System.Windows.Forms.PictureBox();
             this.bottomLeftBox = new System.Windows.Forms.PictureBox();
             this.topRightBox = new System.Windows.Forms.PictureBox();
             this.topLeftBox = new System.Windows.Forms.PictureBox();
-            this.outputButton = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.imageStage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bottomRightBox)).BeginInit();
@@ -52,22 +54,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.topLeftBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // outputPathBox
+            // saveFileNameBox
             // 
-            this.outputPathBox.Location = new System.Drawing.Point(12, 416);
-            this.outputPathBox.Name = "outputPathBox";
-            this.outputPathBox.Size = new System.Drawing.Size(522, 19);
-            this.outputPathBox.TabIndex = 9;
-            // 
-            // selectFolderButton
-            // 
-            this.selectFolderButton.Location = new System.Drawing.Point(540, 414);
-            this.selectFolderButton.Name = "selectFolderButton";
-            this.selectFolderButton.Size = new System.Drawing.Size(42, 23);
-            this.selectFolderButton.TabIndex = 10;
-            this.selectFolderButton.Text = "参照";
-            this.selectFolderButton.UseVisualStyleBackColor = true;
-            this.selectFolderButton.Click += new System.EventHandler(this.OnClickSelectFolder);
+            this.saveFileNameBox.Location = new System.Drawing.Point(91, 416);
+            this.saveFileNameBox.Name = "saveFileNameBox";
+            this.saveFileNameBox.Size = new System.Drawing.Size(572, 19);
+            this.saveFileNameBox.TabIndex = 9;
             // 
             // menuStrip
             // 
@@ -84,16 +76,24 @@
             // fileMenu
             // 
             this.fileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.setSaveDirectoryMenuItem,
             this.exitMenuItem});
             this.fileMenu.Name = "fileMenu";
             this.fileMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
             this.fileMenu.Size = new System.Drawing.Size(67, 20);
             this.fileMenu.Text = "ファイル(&F)";
             // 
+            // setSaveDirectoryMenuItem
+            // 
+            this.setSaveDirectoryMenuItem.Name = "setSaveDirectoryMenuItem";
+            this.setSaveDirectoryMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.setSaveDirectoryMenuItem.Text = "保存先(&S)";
+            this.setSaveDirectoryMenuItem.Click += new System.EventHandler(this.OnClickSetSaveDirectory);
+            // 
             // exitMenuItem
             // 
             this.exitMenuItem.Name = "exitMenuItem";
-            this.exitMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.exitMenuItem.Size = new System.Drawing.Size(124, 22);
             this.exitMenuItem.Text = "終了(&X)";
             this.exitMenuItem.Click += new System.EventHandler(this.OnClickExit);
             // 
@@ -103,21 +103,21 @@
             this.resolutionMenuItem,
             this.cropMenuItem});
             this.editMenu.Name = "editMenu";
-            this.editMenu.Size = new System.Drawing.Size(43, 20);
-            this.editMenu.Text = "編集";
+            this.editMenu.Size = new System.Drawing.Size(57, 20);
+            this.editMenu.Text = "編集(&E)";
             // 
             // resolutionMenuItem
             // 
             this.resolutionMenuItem.Name = "resolutionMenuItem";
-            this.resolutionMenuItem.Size = new System.Drawing.Size(134, 22);
-            this.resolutionMenuItem.Text = "解像度設定";
+            this.resolutionMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.resolutionMenuItem.Text = "解像度設定(&R)";
             this.resolutionMenuItem.Click += new System.EventHandler(this.OnClickCustomizeResolution);
             // 
             // cropMenuItem
             // 
             this.cropMenuItem.Name = "cropMenuItem";
-            this.cropMenuItem.Size = new System.Drawing.Size(134, 22);
-            this.cropMenuItem.Text = "クロップ設定";
+            this.cropMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.cropMenuItem.Text = "クロップ設定(&C)";
             this.cropMenuItem.Click += new System.EventHandler(this.OnClickCustomizeCrop);
             // 
             // helpMenu
@@ -147,6 +147,33 @@
             this.imageStage.TabIndex = 16;
             this.imageStage.TabStop = false;
             this.imageStage.Text = "画像をドラッグアンドドロップ";
+            // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(585, 442);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(80, 23);
+            this.saveButton.TabIndex = 11;
+            this.saveButton.Text = "実行";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.OnClickSaveButton);
+            // 
+            // saveFileNameLabel
+            // 
+            this.saveFileNameLabel.AutoSize = true;
+            this.saveFileNameLabel.Location = new System.Drawing.Point(10, 419);
+            this.saveFileNameLabel.Name = "saveFileNameLabel";
+            this.saveFileNameLabel.Size = new System.Drawing.Size(75, 12);
+            this.saveFileNameLabel.TabIndex = 17;
+            this.saveFileNameLabel.Text = "出力ファイル名";
+            // 
+            // resultLabel
+            // 
+            this.resultLabel.AutoSize = true;
+            this.resultLabel.Location = new System.Drawing.Point(10, 447);
+            this.resultLabel.Name = "resultLabel";
+            this.resultLabel.Size = new System.Drawing.Size(0, 12);
+            this.resultLabel.TabIndex = 18;
             // 
             // bottomRightBox
             // 
@@ -204,24 +231,15 @@
             this.topLeftBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDropPictureBox);
             this.topLeftBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnterPictureBox);
             // 
-            // outputButton
-            // 
-            this.outputButton.Location = new System.Drawing.Point(588, 414);
-            this.outputButton.Name = "outputButton";
-            this.outputButton.Size = new System.Drawing.Size(75, 23);
-            this.outputButton.TabIndex = 11;
-            this.outputButton.Text = "出力";
-            this.outputButton.UseVisualStyleBackColor = true;
-            this.outputButton.Click += new System.EventHandler(this.OnClickOutput);
-            // 
             // ImageBondForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(677, 444);
-            this.Controls.Add(this.selectFolderButton);
-            this.Controls.Add(this.outputButton);
-            this.Controls.Add(this.outputPathBox);
+            this.ClientSize = new System.Drawing.Size(677, 476);
+            this.Controls.Add(this.resultLabel);
+            this.Controls.Add(this.saveFileNameLabel);
+            this.Controls.Add(this.saveButton);
+            this.Controls.Add(this.saveFileNameBox);
             this.Controls.Add(this.imageStage);
             this.Controls.Add(this.menuStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -245,8 +263,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox outputPathBox;
-        private System.Windows.Forms.Button selectFolderButton;
+        private System.Windows.Forms.TextBox saveFileNameBox;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileMenu;
         private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
@@ -257,10 +274,13 @@
         private System.Windows.Forms.PictureBox bottomRightBox;
         private System.Windows.Forms.PictureBox bottomLeftBox;
         private System.Windows.Forms.PictureBox topRightBox;
-        private System.Windows.Forms.Button outputButton;
+        private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.ToolStripMenuItem editMenu;
         private System.Windows.Forms.ToolStripMenuItem resolutionMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cropMenuItem;
+        private System.Windows.Forms.Label saveFileNameLabel;
+        private System.Windows.Forms.ToolStripMenuItem setSaveDirectoryMenuItem;
+        private System.Windows.Forms.Label resultLabel;
     }
 }
 
