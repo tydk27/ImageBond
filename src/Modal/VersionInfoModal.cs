@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace ImageBond.Views.Modal
+namespace ImageBond.Modal
 {
     /// <summary>
     /// VersionInfoFormClass

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ImageBond.Views.Modal
+namespace ImageBond.Modal
 {
     public partial class CustomizeResolutionModal : Form
     {

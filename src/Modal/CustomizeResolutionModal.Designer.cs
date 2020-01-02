@@ -1,4 +1,4 @@
-﻿namespace ImageBond.Views.Modal
+﻿namespace ImageBond.Modal
 {
     partial class CustomizeResolutionModal
     {

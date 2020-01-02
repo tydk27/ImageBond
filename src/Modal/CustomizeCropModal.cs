@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ImageBond.Views.Modal
+namespace ImageBond.Modal
 {
     public partial class CustomizeCropModal : Form
     {
@@ -18,7 +18,7 @@ namespace ImageBond.Views.Modal
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void onLoad(object sender, EventArgs e)
+        private void OnLoad(object sender, EventArgs e)
         {
             cropX.Value = decimal.Parse(Properties.Settings.Default.cropX);
             cropY.Value = decimal.Parse(Properties.Settings.Default.cropY);
@@ -29,7 +29,7 @@ namespace ImageBond.Views.Modal
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void onFormClosed(object sender, FormClosedEventArgs e)
+        private void OnFormClosed(object sender, FormClosedEventArgs e)
         {
             Properties.Settings.Default.cropX = cropX.Value.ToString();
             Properties.Settings.Default.cropY = cropY.Value.ToString();
