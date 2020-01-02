@@ -1,4 +1,4 @@
-﻿namespace ImageBond.Views.Modal
+﻿namespace ImageBond.Modal
 {
     partial class CustomizeCropModal
     {
@@ -102,8 +102,8 @@
             this.MinimizeBox = false;
             this.Name = "CustomizeCropModal";
             this.Text = "クロップ設定";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.onFormClosed);
-            this.Load += new System.EventHandler(this.onLoad);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnFormClosed);
+            this.Load += new System.EventHandler(this.OnLoad);
             ((System.ComponentModel.ISupportInitialize)(this.cropY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cropX)).EndInit();
             this.ResumeLayout(false);

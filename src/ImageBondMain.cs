@@ -13,7 +13,7 @@ namespace ImageBond
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Views.Main.ImageBondForm());
+            Application.Run(new Main.ImageBondForm());
 
             Properties.Settings.Default.Save();
         }

@@ -1,4 +1,4 @@
-﻿namespace ImageBond.Views.Main
+﻿namespace ImageBond.Main
 {
     partial class ImageBondForm
     {

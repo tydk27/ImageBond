@@ -10,6 +10,6 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("5d02230e-e6da-418c-ba4e-4f6d9625f3bd")]
 
-[assembly: AssemblyVersion("1.3")]
+[assembly: AssemblyVersion("1.4")]
 [assembly: NeutralResourcesLanguage("ja")]
 
